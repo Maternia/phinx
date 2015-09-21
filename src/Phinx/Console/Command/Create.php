@@ -52,13 +52,12 @@ class Create extends AbstractCommand
 
         $this->setName('create')
             ->setDescription('Create a new migration')
-            ->addArgument('name', InputArgument::REQUIRED, 'What is the name of the migration?')
+            ->addArgument('name', InputArgument::OPTIONAL, 'What is the name of the migration?', 'Migration')
             ->setHelp(sprintf(
                 '%sCreates a new database migration%s',
                 PHP_EOL,
                 PHP_EOL
             ));
-
         // An alternative template.
         $this->addOption('template', 't', InputOption::VALUE_REQUIRED, 'Use an alternative template');
 
@@ -107,6 +106,7 @@ class Create extends AbstractCommand
 
         $path = realpath($path);
         $className = $input->getArgument('name');
+        $className .= Util::getCurrentTimestamp();
 
         if (!Util::isValidMigrationClassName($className)) {
             throw new \InvalidArgumentException(sprintf(

@@ -32,10 +32,6 @@ class CreateTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The migration class name "MyDuplicateMigration" already exists
-     */
     public function testExecuteWithDuplicateMigrationNames()
     {
         $application = new \Phinx\Console\PhinxApplication('testing');
